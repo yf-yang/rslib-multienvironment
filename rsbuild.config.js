@@ -4,9 +4,10 @@ import { pluginModuleFederation } from "@module-federation/rsbuild-plugin";
 export default defineConfig({
   environments: {
     a: {
+      root: "./packages/a",
       source: {
         entry: {
-          index: "./packages/a/src/index.ts",
+          index: "src/index.ts",
         },
       },
       output: {
@@ -18,12 +19,13 @@ export default defineConfig({
         pluginModuleFederation({
           name: "remote",
           exposes: {
-            ".": "./packages/a/src/index.ts",
+            ".": "src/index.ts",
           },
         }),
       ],
     },
     b: {
+      root: "./packages/b",
       source: {
         entry: {
           index: "./packages/b/src/index.ts",
