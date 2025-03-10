@@ -4,7 +4,6 @@ import { pluginModuleFederation } from "@module-federation/rsbuild-plugin";
 export default defineConfig({
   environments: {
     a: {
-      root: "./packages/a",
       source: {
         entry: {
           index: "src/index.ts",
@@ -26,7 +25,6 @@ export default defineConfig({
       ],
     },
     b: {
-      root: "./packages/b",
       source: {
         entry: {
           index: "./packages/b/src/index.ts",
