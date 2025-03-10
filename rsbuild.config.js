@@ -9,6 +9,7 @@ export default defineConfig({
         entry: {
           index: "src/index.ts",
         },
+        tsconfigPath: "./packages/a/tsconfig.json",
       },
       output: {
         distPath: {
@@ -30,6 +31,7 @@ export default defineConfig({
         entry: {
           index: "./packages/b/src/index.ts",
         },
+        tsconfigPath: "./packages/b/tsconfig.json",
       },
       output: {
         target: "web",
