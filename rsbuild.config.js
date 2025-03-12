@@ -20,6 +20,9 @@ export default defineConfig({
           plugins: [
             new ModuleFederationPlugin({
               name: "remote",
+              exposes: {
+                ".": "./packages/a/src/index.ts",
+              },
             }),
           ],
         },
@@ -33,7 +36,6 @@ export default defineConfig({
         tsconfigPath: "./packages/b/tsconfig.json",
       },
       output: {
-        target: "web",
         distPath: {
           root: "dist/b",
         },
