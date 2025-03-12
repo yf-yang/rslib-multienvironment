@@ -1,12 +1,12 @@
 import { defineConfig } from "@rsbuild/core";
-import { pluginModuleFederation } from "@module-federation/rsbuild-plugin";
+import { ModuleFederationPlugin } from "@module-federation/enhanced/rspack";
 
 export default defineConfig({
   environments: {
     a: {
       source: {
         entry: {
-          index: "src/index.ts",
+          index: "./packages/a/src/index.ts",
         },
         tsconfigPath: "./packages/a/tsconfig.json",
       },
@@ -15,14 +15,15 @@ export default defineConfig({
           root: "dist/a",
         },
       },
-      plugins: [
-        pluginModuleFederation({
-          name: "remote",
-          exposes: {
-            ".": "src/index.ts",
-          },
-        }),
-      ],
+      tools: {
+        rspack: {
+          plugins: [
+            new ModuleFederationPlugin({
+              name: "remote",
+            }),
+          ],
+        },
+      },
     },
     b: {
       source: {
@@ -37,14 +38,18 @@ export default defineConfig({
           root: "dist/b",
         },
       },
-      plugins: [
-        pluginModuleFederation({
-          name: "remote",
-          exposes: {
-            ".": "./packages/b/src/index.ts",
-          },
-        }),
-      ],
+      tools: {
+        rspack: {
+          plugins: [
+            new ModuleFederationPlugin({
+              name: "remote",
+              exposes: {
+                ".": "./packages/b/src/index.ts",
+              },
+            }),
+          ],
+        },
+      },
     },
   },
   output: {
